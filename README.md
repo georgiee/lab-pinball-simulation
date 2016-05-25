@@ -1,4 +1,5 @@
 #Pinball (Phase & P2JS)
+[Preview](http://georgiee.github.io/lab-pinball-simulation/)
 
 Looks weird?? Yeah sorry.🤕
 This was client work from some years ago. To make it public I had to clean it up and obfuscated the involved assets.
