@@ -1,0 +1,43 @@
+(function() {
+  var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+
+  Pinball.Controller.TableZonesController = (function() {
+    function TableZonesController(game, ballCollisionsListener, playfield) {
+      this.enterZone = __bind(this.enterZone, this);
+      this.leaveZone = __bind(this.leaveZone, this);
+      this.playfield = playfield;
+      this.surface = playfield.get('surface');
+      this.ball = playfield.get('ball');
+      this.ballCollision = ballCollisionsListener;
+      this.ballCollision["with"](this.surface.zones.zoneEnityTL, this.enterZone, this.leaveZone);
+      this.ballCollision["with"](this.surface.zones.zoneEnityTR, this.enterZone, this.leaveZone);
+      this.ballCollision["with"](this.surface.zones.zoneEnityBL, this.enterZone, this.leaveZone);
+      this.ballCollision["with"](this.surface.zones.zoneEnityBR, this.enterZone, this.leaveZone);
+    }
+
+    TableZonesController.prototype.leaveZone = function(entity, contact) {
+      return this.setZone(entity, false);
+    };
+
+    TableZonesController.prototype.enterZone = function(entity, contact) {
+      return this.setZone(entity, true);
+    };
+
+    TableZonesController.prototype.setZone = function(entity, active) {
+      switch (entity) {
+        case this.surface.zones.zoneEnityTL:
+          return this.surface.enableZone1(active);
+        case this.surface.zones.zoneEnityTR:
+          return this.surface.enableZone2(active);
+        case this.surface.zones.zoneEnityBL:
+          return this.surface.enableZone3(active);
+        case this.surface.zones.zoneEnityBR:
+          return this.surface.enableZone4(active);
+      }
+    };
+
+    return TableZonesController;
+
+  })();
+
+}).call(this);
